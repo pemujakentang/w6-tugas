@@ -1,0 +1,20 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model GuestbookEntry {
+  id        Int      @id @default(autoincrement()) // Auto-incrementing unique identifier
+  name      String   @map("username")              // The user's name
+  email     String   @unique                       // The user's email (unique to ensure no duplicates)
+  comment   String                                 // The user's comment on the guestbook
+  createdAt DateTime @default(now())               // Timestamp for when the comment was created
+}

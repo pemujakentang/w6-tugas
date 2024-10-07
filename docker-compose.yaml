@@ -1,0 +1,40 @@
+services:
+  nuxt-app:
+    build:
+      context: .
+      args: 
+        DATABASE_URL: mysql://root:example@mariadb:3306/nuxtdb
+
+    container_name: nuxt_app_container
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./public:/app/public
+      # - ./database:/app/database
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3000
+    depends_on:
+      - mariadb
+    networks:
+      - nuxt_network
+
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    restart: always
+    ports:
+      - "3420:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: nuxtdb
+      MYSQL_USER: nuxtuser
+      MYSQL_PASSWORD: nuxtpassword
+    volumes:
+      - ./database:/var/lib/mysql
+    networks:
+      - nuxt_network
+
+networks:
+  nuxt_network:
+    driver: bridge
