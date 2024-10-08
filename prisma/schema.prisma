@@ -14,7 +14,7 @@ datasource db {
 model GuestbookEntry {
   id        Int      @id @default(autoincrement()) // Auto-incrementing unique identifier
   name      String   @map("username")              // The user's name
-  email     String   @unique                       // The user's email (unique to ensure no duplicates)
+  email     String                                 // The user's email (unique to ensure no duplicates)
   comment   String                                 // The user's comment on the guestbook
   createdAt DateTime @default(now())               // Timestamp for when the comment was created
 }
