@@ -17,6 +17,7 @@
   "dependencies": {
     "@picocss/pico": "^2.0.6",
     "@prisma/client": "^5.20.0",
+    "dompurify": "^3.1.7",
     "nuxt": "^3.13.0",
     "vue": "latest",
     "vue-router": "latest"
